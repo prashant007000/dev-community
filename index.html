@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIT Developer Community</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            color: #1F2937;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #00154e;
+        }
+
+        /* Slider */
+        .slider {
+            position: relative;
+            overflow: hidden;
+            height: 85vh;
+            width: 100%;
+            border: 4px solid #1E3A8A;
+            background: linear-gradient(135deg, #EFF6FF, #BFDBFE);
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.3);
+        }
+        .slides {
+            display: flex;
+            width: 300%; /* 3 slides */
+            animation: slide 18s infinite;
+        }
+        .slide {
+            width: 33.33%; /* 100% / 3 slides */
+            height: 85vh;
+            object-fit: cover;
+        }
+        @keyframes slide {
+            0% { transform: translateX(0); }          /* Slide 1 starts */
+            25% { transform: translateX(0); }         /* Pause Slide 1 (4.5s) */
+            33.33% { transform: translateX(-33.33%); } /* Move to Slide 2 (1.5s) */
+            58.33% { transform: translateX(-33.33%); } /* Pause Slide 2 (4.5s) */
+            66.66% { transform: translateX(-66.66%); } /* Move to Slide 3 (1.5s) */
+            91.66% { transform: translateX(-66.66%); } /* Pause Slide 3 (4.5s) */
+            100% { transform: translateX(0); }        /* Back to Slide 1 (1.5s) */
+        }
+        .absolute {
+            z-index: 10;
+        }
+
+        /* Button Styling */
+        .btn-sexy {
+            background: linear-gradient(135deg, #1E3A8A, #60A5FA);
+            border: 3px solid #3B82F6;
+            padding: 0.75rem 2.5rem;
+            font-weight: 600;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .btn-sexy:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 15px 25px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, #60A5FA, #1E3A8A);
+        }
+        .btn-sexy::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+        .btn-sexy:hover::after {
+            top: 100%;
+            left: 100%;
+        }
+
+        /* Animations */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: linear-gradient(180deg, #1E3A8A, #3B82F6);
+            transition: all 0.5s ease;
+            box-shadow: 0 0 20px rgba(30, 58, 138, 0.5);
+            border-right: 4px solid #1E3A8A;
+        }
+        .sidebar.active {
+            transform: translateX(0);
+        }
+        .sidebar a {
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: #60A5FA;
+            transition: all 0.4s ease;
+        }
+        .sidebar a:hover::after {
+            left: 0;
+        }
+
+        /* Hover Effects */
+        .hover-effect {
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .hover-effect:hover {
+            transform: scale(1.08) translateY(-10px);
+            box-shadow: 0 20px 30px rgba(30, 58, 138, 0.4);
+        }
+        .hover-effect::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(59, 130, 246, 0.2);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+        .hover-effect:hover::before {
+            top: 0;
+        }
+
+        /* Gradient Section */
+        .gradient-section {
+            background: linear-gradient(to bottom, #EFF6FF, #BFDBFE);
+            border: 4px solid #1E3A8A;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(30, 58, 138, 0.1));
+            animation: bg-move 10s infinite linear;
+            z-index: -1;
+        }
+        @keyframes bg-move {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+            100% { transform: translateX(-100%) translateY(-100%); }
+        }
+
+        /* Card Background */
+        .card-bg {
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            color: white;
+            border: 3px solid #60A5FA;
+        }
+
+        /* Fade-In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 640px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                z-index: 50;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .content {
+                padding: 1rem;
+            }
+            .slider {
+                height: 50vh;
+            }
+            .slide {
+                height: 50vh;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            .btn-sexy { padding: 0.5rem 1.5rem; }
+            .grid-cols-1 { grid-template-columns: 1fr; }
+            .md\:grid-cols-2, .md\:grid-cols-3, .md\:grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 20%;
+                height: 100vh;
+                z-index: 50;
+            }
+            .content {
+                padding-left: 20%;
+                padding-right: 1rem;
+            }
+            .slider {
+                height: 70vh;
+            }
+            .slide {
+                height: 70vh;
+            }
+            h1 { font-size: 4rem; }
+            h2 { font-size: 3rem; }
+            h3 { font-size: 2rem; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
+            .md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1025px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 16rem;
+                height: 100vh;
+                z-index: 50;
+            }
+            .content {
+                padding-left: 18rem;
+                padding-right: 2rem;
+            }
+            .slider {
+                height: 85vh;
+            }
+            .slide {
+                height: 85vh;
+            }
+            h1 { font-size: 5rem; }
+            h2 { font-size: 4rem; }
+            h3 { font-size: 2.5rem; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger Menu -->
+    <div class="fixed top-4 left-4 z-50 sm:hidden">
+        <button id="menu-btn" class="text-3xl text-blue-900 focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar text-white p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-3xl font-bold font-playfair animate-pulse">TIT DEV</h3>
+            <button id="close-btn" class="text-2xl text-white sm:hidden focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="space-y-6">
+            <li><a href="#home" class="block text-blue-200 hover:text-white text-lg">Home</a></li>
+            <li><a href="#about" class="block text-blue-200 hover:text-white text-lg">About</a></li>
+            <li><a href="#mentors" class="block text-blue-200 hover:text-white text-lg">Mentors</a></li>
+            <li><a href="#events" class="block text-blue-200 hover:text-white text-lg">Events</a></li>
+            <li><a href="#hall-of-fame" class="block text-blue-200 hover:text-white text-lg">Hall of Fame</a></li>
+            <li><a href="#testimonials" class="block text-blue-200 hover:text-white text-lg">Testimonials</a></li>
+            <li><a href="#join-us" class="block text-blue-200 hover:text-white text-lg">Join Us</a></li>
+            <li><a href="#gallery" class="block text-blue-200 hover:text-white text-lg">Gallery</a></li>
+            <li><a href="#contact" class="block text-blue-200 hover:text-white text-lg">Contact</a></li>
+            <li><a href="#faqs" class="block text-blue-200 hover:text-white text-lg">FAQs</a></li>
+        </ul>
+        <a href="#join-us" class="mt-10 inline-block btn-sexy pulse">Join Now</a>
+    </div>
+
+    <!-- Content -->
+    <div class="content pt-20">
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen">
+            <div class="slider">
+                <div class="slides">
+                    <img src="/home/WhatsApp Image 2024-04-24 at 19.34.00_4d52b293.jpg" alt="Workshop" class="slide">
+                    <img src="/home/Screenshot 2024-05-05 220658.png" alt="Hackathon" class="slide">
+                    <img src="/home/Screenshot 2025-02-26 145958.png" alt="Event" class="slide">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 to-transparent flex flex-col items-center justify-center text-center">
+                    <h1 class="font-bold text-6xl text-white animate-bounce">TIT Developer Community</h1>
+                    <p class="text-xl md:text-3xl mt-6 text-blue-500 font-semibold pulse">"Empowering Juniors, Led by Seniors"</p>
+                    <a href="#join-us" class="mt-10 btn-sexy">Get Started</a>
+                </div>
+            </div>
+            <!-- Wall of Impact -->
+            <div class="max-w-6xl mx-auto mt-16 fade-in px-6">
+                <h2 class="font-bold text-3xl text-center mb-12">Wall of Impact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-6 card-bg hover-effect">
+                        <h3 class="font-bold">90%+</h3>
+                        <p class="opacity-90 mt-3 text-lg">ATS-Friendly Resumes</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <h3 class="font-bold">Versatile</h3>
+                        <p class="opacity-90 mt-3 text-lg">Tech Domains</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <h3 class="font-bold">15+</h3>
+                        <p class="opacity-90 mt-3 text-lg">ML Enthusiasts</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <h3 class="font-bold">20+</h3>
+                        <p class="opacity-90 mt-3 text-lg">App Developers</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <h3 class="font-bold">15+</h3>
+                        <p class="opacity-90 mt-3 text-lg">Web Developers</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <h3 class="font-bold">30+</h3>
+                        <p class="opacity-90 mt-3 text-lg">Cybersecurity</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="py-24 gradient-section fade-in px-6">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="font-bold text-3xl text-center mb-12">About Us</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="hover-effect p-6 bg-white/50 border-3 border-blue-500">
+                        <h3 class="font-bold">Who We Are</h3>
+                        <p class="mt-4 text-lg">A student-led community bridging juniors and seniors through mentorship and projects.</p>
+                    </div>
+                    <div class="hover-effect p-6 bg-white/50 border-3 border-blue-500">
+                        <h3 class="font-bold">Why Join?</h3>
+                        <ul class="mt-4 space-y-3 text-lg">
+                            <li>Real-world projects</li>
+                            <li>Workshops & hackathons</li>
+                            <li>Mentorship</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mentors -->
+        <section id="mentors" class="py-24 bg-white fade-in px-6">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="font-bold mb-12 text-3xl">Meet the Mentors</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <img src="mentors/ankit kumar.jpg" alt="Ankit Kumar" class="w-36 h-36 rounded-full mx-auto">
+                        <h3 class="mt-4 font-bold">Ankit Kumar</h3>
+                        <a href="https://linkedin.com/in/ankitkumar0905" class="text-blue-500 hover:text-blue-700 text-lg">LinkedIn</a>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <img src="mentors/Anand Soni.png" alt="Anand Soni" class="w-36 h-36 rounded-full mx-auto">
+                        <h3 class="mt-4 font-bold">Anand Soni</h3>
+                        <a href="https://linkedin.com/in/anandsoni992" class="text-blue-500 hover:text-blue-700 text-lg">LinkedIn</a>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <img src="mentors/ankit patel .jpg" alt="Ankit Patel" class="w-36 h-36 rounded-full mx-auto">
+                        <h3 class="mt-4 font-bold">Ankit Patel</h3>
+                        <a href="https://linkedin.com/in/ankit-patel-563b9927b" class="text-blue-500 hover:text-blue-700 text-lg">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events -->
+        <section id="events" class="py-24 gradient-section fade-in px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-bold text-center mb-12 text-3xl">Events</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/events-20250326T130434Z-001/events/IMG_1560.JPG" alt="Android Workshop" class="w-full h-52 object-cover">
+                        <h3 class="mt-4 font-bold">Android Workshop</h3>
+                        <p class="opacity-80 mt-3 text-lg">Build your first app!</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/events-20250326T130434Z-001/events/IMG_1590.JPG" alt="Web Hackathon" class="w-full h-52 object-cover">
+                        <h3 class="mt-4 font-bold">Web Hackathon</h3>
+                        <p class="opacity-80 mt-3 text-lg">Code a site in 24hrs</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/events-20250326T130434Z-001/events/IMG_1539.JPG" alt="Coding Quest" class="w-full h-52 object-cover">
+                        <h3 class="mt-4 font-bold">Coding Quest</h3>
+                        <p class="opacity-80 mt-3 text-lg">Win exciting prizes</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/events-20250326T130434Z-001/events/Screenshot 2025-02-26 120900.png" alt="Regular Classes" class="w-full h-52 object-cover">
+                        <h3 class="mt-4 font-bold">Regular Classes</h3>
+                        <p class="opacity-80 mt-3 text-lg">Learn via Google Meet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hall of Fame -->
+        <section id="hall-of-fame" class="py-24 bg-white fade-in px-6">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="font-bold mb-12 text-3xl">Hall of Fame</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <h3 class="font-bold">Android Dev</h3>
+                        <p class="mt-3 text-lg">Dipu Kumar: 5+ projects</p>
+                        <p class="mt-2 text-lg">Aryan Sharma: 10+ projects</p>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <h3 class="font-bold">Machine Learning</h3>
+                        <p class="mt-3 text-lg">Aman Mishra: 5+ projects</p>
+                        <p class="mt-2 text-lg">Deepika D.: 10+ projects</p>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <h3 class="font-bold">Web Dev</h3>
+                        <p class="mt-3 text-lg">Prakhar: 10+ projects</p>
+                        <p class="mt-2 text-lg">Naman Kumar: Internship</p>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 hover-effect">
+                        <h3 class="font-bold">Cybersecurity</h3>
+                        <p class="mt-3 text-lg">Akash K.: 3+ projects</p>
+                        <p class="mt-2 text-lg">Mohd Meraaz: Training</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-24 gradient-section fade-in px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-bold text-center mb-12 text-3xl">Testimonials</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/testimonials/100000263.jpeg" alt="Naman Kumar" class="w-36 h-36 rounded-full mx-auto">
+                        <p class="mt-4 text-lg">"Landed an internship!"</p>
+                        <p class="mt-3 font-semibold text-blue-300">Naman Kumar</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/testimonials/images.jpeg" alt="Aman Mishra" class="w-36 h-36 rounded-full mx-auto">
+                        <p class="mt-4 text-lg">"SIH finalist thanks to ML!"</p>
+                        <p class="mt-3 font-semibold text-blue-300">Aman Mishra</p>
+                    </div>
+                    <div class="p-6 card-bg hover-effect">
+                        <img src="/testimonials/pngtree-engineer-man-working-on-laptop-png-image_8997235.png" alt="Aryan Sharma" class="w-36 h-36 rounded-full mx-auto">
+                        <p class="mt-4 text-lg">"App on Play Store!"</p>
+                        <p class="mt-3 font-semibold text-blue-300">Aryan Sharma</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Join -->
+        <section id="join-us" class="py-24 bg-white fade-in px-6">
+            <div class="max-w-5xl mx-auto border-3 border-blue-500 p-8 gradient-section">
+                <h2 class="font-bold text-center mb-12 text-3xl">How to Join?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="hover-effect p-6 bg-white/50 border-3 border-blue-500">
+                        <h3 class="font-bold">Coding Quest</h3>
+                        <p class="mt-4 text-lg">Annual competition with MCQs & coding challenges.</p>
+                        <p class="mt-3 text-lg"><strong>Dates:</strong> April 1-16, 2025</p>
+                    </div>
+                    <div class="hover-effect p-6 bg-white/50 border-3 border-blue-500">
+                        <h3 class="font-bold">Hackathon</h3>
+                        <p class="mt-4 text-lg">Showcase your skills & join the community.</p>
+                        <a href="#" class="mt-6 inline-block btn-sexy">Register</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="py-24 gradient-section fade-in px-6">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="font-bold mb-12 text-3xl">Gallery</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <img src="/events-20250326T130434Z-001/events/IMG_1581.JPG" alt="Tech Workshop" class="w-full h-56 object-cover hover-effect border-3 border-blue-500">
+                    <img src="/events-20250326T130434Z-001/events/Screenshot 2025-02-26 120900.png" alt="Hackathon" class="w-full h-56 object-cover hover-effect border-3 border-blue-500">
+                    <img src="/events-20250326T130434Z-001/events/IMG_1568.JPG" alt="Winning Moment" class="w-full h-56 object-cover hover-effect border-3 border-blue-500">
+                    <a href="/events-20250326T130434Z-001/events/IMG_1586.JPG" target="_blank" class="w-full h-56 hover-effect border-3 border-blue-500 bg-blue-800 flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-5xl pulse"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-24 bg-white fade-in px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-bold mb-12 text-3xl">Contact Us</h2>
+                <form class="max-w-lg mx-auto bg-gradient-to-br from-white to-blue-50 border-3 border-blue-500 p-8">
+                    <input type="text" placeholder="Name" class="w-full p-4 mb-6 border-3 border-blue-300 focus:ring-2 focus:ring-blue-500 transition-all">
+                    <input type="email" placeholder="Email" class="w-full p-4 mb-6 border-3 border-blue-300 focus:ring-2 focus:ring-blue-500 transition-all">
+                    <textarea placeholder="Message" class="w-full p-4 mb-6 border-3 border-blue-300 h-36 focus:ring-2 focus:ring-blue-500 transition-all"></textarea>
+                    <button type="submit" class="btn-sexy">Send</button>
+                </form>
+                <p class="mt-10 text-lg">Email: <a href="mailto:contact@titdev.com" class="text-blue-500 hover:text-blue-700 hover:underline">contact@titdev.com</a></p>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section id="faqs" class="py-24 gradient-section fade-in px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-bold text-center mb-12 text-3xl">FAQs</h2>
+                <div class="space-y-8 border-3 border-blue-500 p-8 bg-white/50">
+                    <div class="hover-effect p-6 border-3 border-blue-500">
+                        <h3 class="font-bold">How to Join?</h3>
+                        <p class="mt-3 text-lg">Join via Coding Quest or Hackathon—check above!</p>
+                    </div>
+                    <div class="hover-effect p-6 border-3 border-blue-500">
+                        <h3 class="font-bold">Events?</h3>
+                        <p class="mt-3 text-lg">Workshops, hackathons, classes—see Events section.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-10 px-6 bg-gradient-to-r from-blue-900 to-blue-700 text-white text-center">
+            <p class="opacity-80 text-lg">© 2025 TIT Developer Community</p>
+            <div class="flex justify-center space-x-8 mt-6 flex-wrap gap-4">
+                <a href="https://instagram.com/reel/DFsan4FNXzx/" target="_blank" class="hover:text-blue-300 transition-all hover-effect">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </a>
+                <a href="https://instagram.com/reel/DFiHXEGTSf8/" target="_blank" class="hover:text-blue-300 transition-all hover-effect">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </a>
+                <a href="https://instagram.com/reel/C5iuVj7SN4O/" target="_blank" class="hover:text-blue-300 transition-all hover-effect">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </a>
+                <a href="https://instagram.com/reel/C6ix3uPL7Jp/" target="_blank" class="hover:text-blue-300 transition-all hover-effect">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Sidebar Toggle -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 150) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
